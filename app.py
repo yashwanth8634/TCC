@@ -47,7 +47,7 @@ with st.expander("Show Instructions"):
 # Load trained model
 @st.cache_resource(show_spinner=True)
 def load_model():
-    return tf.keras.models.load_model(r"C:\Users\vrish\OneDrive\Desktop\project\tcc_unet_classifier.h5")
+    return tf.keras.models.load_model("tcc_unet_classifier.h5")
 
 model = load_model()
 
