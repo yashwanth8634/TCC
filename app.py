@@ -43,11 +43,14 @@ instructions = """
 """
 with st.expander("Show Instructions"):
     st.markdown(instructions, unsafe_allow_html=True)
-
+# Add this function to your app.py
+def dice_coefficient(y_true, y_pred, smooth=1):
+    intersection = K.sum(K.abs(y_true * y_pred), axis=-1)
+    return (2. * intersection + smooth) / (K.sum(K.square(y_true),-1) + K.sum(K.square(y_pred),-1) + smooth)
 # Load trained model
 @st.cache_resource(show_spinner=True)
 def load_model():
-    return tf.keras.models.load_model("tcc_unet_classifier.h5")
+    return tf.keras.models.load_model("tcc_unet_classifier.h5",custom_objects={"dice_coefficient": dice_coefficient})
 
 model = load_model()
 
