@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: streamlit-tensor-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: ./setup.sh
+    plan: free
